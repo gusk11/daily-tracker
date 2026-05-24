@@ -272,7 +272,7 @@ export async function getDailyReview(date: string): Promise<DailyReview | null> 
     .from('daily_reviews')
     .select('*')
     .eq('date', date)
-    .single();
+    .maybeSingle();
 
   if (error && error.code !== 'PGRST116') {
     console.error('Error fetching daily review:', error);
