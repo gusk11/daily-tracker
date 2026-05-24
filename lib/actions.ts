@@ -24,7 +24,7 @@ export async function createCategory(name: string, color: string): Promise<Categ
     .from('categories')
     .insert([{ name, color }])
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error creating category:', error);
@@ -84,7 +84,7 @@ export async function createHabit(name: string, color: string): Promise<Habit | 
     .from('habits')
     .insert([{ name, color, is_active: true, sort_order: 0 }])
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error creating habit:', error);
@@ -130,7 +130,7 @@ export async function toggleHabitCheck(habitId: string, date: string): Promise<b
     .select('*')
     .eq('habit_id', habitId)
     .eq('date', date)
-    .single();
+    .maybeSingle();
 
   if (existing) {
     const { error } = await supabase
@@ -192,7 +192,7 @@ export async function createTask(
       },
     ])
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error creating task:', error);
@@ -211,7 +211,7 @@ export async function updateTask(
     .update(updates)
     .eq('id', id)
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error updating task:', error);
@@ -238,7 +238,7 @@ export async function reopenTask(id: string): Promise<Task | null> {
 }
 
 export async function postponeTask(id: string, newDueDate: string): Promise<Task | null> {
-  const task = await supabase.from('tasks').select('*').eq('id', id).single();
+  const task = await supabase.from('tasks').select('*').eq('id', id).maybeSingle();
 
   if (task.error) {
     console.error('Error fetching task:', task.error);
@@ -316,7 +316,7 @@ export async function upsertDailyReview(
       }
     )
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error upserting daily review:', error);
