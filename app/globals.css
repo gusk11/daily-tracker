@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #071525;
+  --foreground: #f1f5f9;
+  --card: #10243d;
+  --card-secondary: #132b49;
+  --border: #1e3a5f;
+  --primary: #38bdf8;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
 }
 
 @theme inline {
@@ -12,15 +19,43 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  @apply border-slate-700;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-slate-900 text-slate-100;
+  background: linear-gradient(135deg, #071525 0%, #0f1b2e 50%, #071525 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-600 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-500;
+}
+
+/* Selection */
+::selection {
+  @apply bg-sky-500 text-white;
+}
+
+/* Focus Ring */
+:focus-visible {
+  @apply outline-none ring-2 ring-sky-500 ring-offset-2 ring-offset-slate-900;
 }
